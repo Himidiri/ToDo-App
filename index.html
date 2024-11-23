@@ -15,8 +15,8 @@
     <div class="card w-50 m-auto mt-5 bg-dark-subtle">
         <div class="card-body">
             <div class="input-group">
-                <input type="text" class="form-control">
-                <button class="btn btn-danger" type="button" onclick="addTask()">Add Task</button>
+                <input id="userInput" type="text" class="form-control">
+                <button class="btn btn-danger" type="button" id="addTaskBtn">Add Task</button>
             </div>
         </div>
     </div>
@@ -25,37 +25,12 @@
         <div class="row">
             <div class="col-5">
                 <h1 class="bg-success text-white p-3 text-center">Done Task List</h1>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item mt-3">An item</li>
-                    <li class="list-group-item mt-3">A second item</li>
-                    <li class="list-group-item mt-3">A third item</li>
-                    <li class="list-group-item mt-3">A fourth item</li>
-                    <li class="list-group-item mt-3">And a fifth one</li>
+                <ul id="task" class="list-group list-group-flush">
                 </ul>
             </div>
             <div class="col-7">
                 <h1 class="bg-danger text-white p-3 text-center">ToDo List</h1>
-                <ul class="list-group list-group-flush">
-                    <li class="list-group-item mt-3">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">
-                        <label class="form-check-label" for="firstCheckbox">First checkbox</label>
-                    </li>
-                    <li class="list-group-item mt-3">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="secondCheckbox">
-                        <label class="form-check-label" for="secondCheckbox">Second checkbox</label>
-                    </li>
-                    <li class="list-group-item mt-3">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-                        <label class="form-check-label" for="thirdCheckbox">Third checkbox</label>
-                    </li>
-                    <li class="list-group-item mt-3">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-                        <label class="form-check-label" for="thirdCheckbox">Third checkbox</label>
-                    </li>
-                    <li class="list-group-item mt-3">
-                        <input class="form-check-input me-1" type="checkbox" value="" id="thirdCheckbox">
-                        <label class="form-check-label" for="thirdCheckbox">Third checkbox</label>
-                    </li>
+                <ul id="addTask" class="list-group list-group-flush">
                 </ul>
             </div>
         </div>
@@ -65,6 +40,7 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </body>
 
