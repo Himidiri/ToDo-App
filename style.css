@@ -7,3 +7,8 @@
 html {
     scroll-behavior: smooth;
 }
+
+.strikethrough {
+    text-decoration: line-through;
+    color: #888;
+}

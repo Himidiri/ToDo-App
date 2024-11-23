@@ -1,50 +1,70 @@
 let todoTasks = [];
+let doneTasks = [];
 
 document.getElementById("addTaskBtn").addEventListener("click", addTask);
 
 function addTask() {
-  let userInputElement = document.getElementById("userInput");
-  let userInput = userInputElement.value;
+    let userInputElement = document.getElementById("userInput");
+    let userInput = userInputElement.value;
 
-  if (userInput == "") {
-    Swal.fire({
-      icon: "warning",
-      title: "Empty Input",
-      text: "Please enter Your Task.",
-    });
-    return;
-  }
+    if (userInput === "") {
+        Swal.fire({
+            icon: "warning",
+            title: "Empty Input",
+            text: "Please enter Your Task.",
+        });
+        return;
+    }
 
-  let taskId = todoTasks.length + 1;
+    let taskId = todoTasks.length + 1;
 
-  todoTasks.push({ id: taskId, text: userInput });
+    todoTasks.push({ id: taskId, text: userInput, isChecked: false });
 
-  document.getElementById("addTask").innerHTML += `
+    let taskItemHTML = `
     <li class="list-group-item mt-3" id="todoTask-${taskId}"> 
-        <input class="form-check-input me-1" type="checkbox" id="checkbox-${taskId}"> 
-        <label class="form-check-label" for="checkbox-${taskId}">${userInput}</label> 
+      <input class="form-check-input me-1" type="checkbox" id="checkbox-${taskId}" ${false ? 'checked' : ''}> 
+      <label class="form-check-label" for="checkbox-${taskId}">${userInput}</label> 
     </li>`;
 
-  userInputElement.value = "";
+    document.getElementById("addTask").insertAdjacentHTML("beforeend", taskItemHTML);
 
-  document
-    .getElementById(`checkbox-${taskId}`)
-    .addEventListener("change", function () {
-      taskToDone(taskId);
-    });
+    userInputElement.value = "";
+
+    if (doneTasks.find(task => task.id === taskId && task.isChecked)) {
+        document.getElementById("task").insertAdjacentHTML("beforeend", `
+      <li class="list-group-item mt-3" id="doneTask-${taskId}">${userInput}</li>
+    `);
+    }
 }
 
-function taskToDone(taskId) {
-  let taskElement = document.getElementById(`todoTask-${taskId}`);
+document.getElementById("addTask").addEventListener("change", function (event) {
+    if (event.target && event.target.type === "checkbox") {
+        let taskId = parseInt(event.target.id.replace('checkbox-', ''));
+        let isChecked = event.target.checked;
+        handleTaskCheckboxChange(taskId, isChecked);
+    }
+});
 
-  if (taskElement) {
-    let taskText = todoTasks.find((task) => task.id === taskId)?.text;
+function handleTaskCheckboxChange(taskId, isChecked) {
+    let task = todoTasks.find((task) => task.id === taskId);
+    task.isChecked = isChecked;
 
-    document.getElementById("task").innerHTML += `
-        <li class="list-group-item mt-3">${taskText}</li>`;
+    let taskText = task.text;
 
-    taskElement.remove();
+    let taskLabel = document.querySelector(`#todoTask-${taskId} .form-check-label`);
 
-    todoTasks = todoTasks.filter((task) => task.id !== taskId);
-  }
+    if (isChecked) {
+        taskLabel.classList.add("strikethrough");
+
+        document.getElementById("task").insertAdjacentHTML("beforeend", `
+      <li class="list-group-item mt-3" id="doneTask-${taskId}">${taskText}</li>
+    `);
+    } else {
+        taskLabel.classList.remove("strikethrough");
+
+        let doneTaskElement = document.getElementById(`doneTask-${taskId}`);
+        if (doneTaskElement) {
+            doneTaskElement.remove();
+        }
+    }
 }
