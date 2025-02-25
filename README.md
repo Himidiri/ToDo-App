@@ -12,3 +12,10 @@ A simple [ToDo application](https://himidiri.github.io/ToDo-App/) built using HT
 ## Screenshots
 ![image](https://github.com/user-attachments/assets/616a4824-b69f-4ad4-b18b-a45eb80fea0b)
 ![image](https://github.com/user-attachments/assets/3911d902-7ddd-45d9-9fda-3343a3e70273)
+
+## Installation
+1. Clone the repository:
+   ```sh
+    git clone https://github.com/Himidiri/ToDo-App.git
+    ```
+2. Open `index.html` in your preferred browser.
